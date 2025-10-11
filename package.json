@@ -1,0 +1,39 @@
+{
+  "name": "fitness-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "setup": "node supabase/setup.js",
+    "create-tables": "node supabase/create-tables.js",
+    "seed": "node supabase/seed.js",
+    "seed-simple": "node supabase/seed-simple.js",
+    "seed-full": "node supabase/seed-full.js",
+    "seed-data": "node supabase/seed-data-only.js",
+    "seed-minimal": "node supabase/seed-minimal.js",
+    "test-connection": "node supabase/test-connection.js",
+    "test-apis": "node supabase/test-apis.js",
+    "test-upvotes": "node supabase/test-upvotes.js",
+    "check-tables": "node supabase/check-missing-tables.js",
+    "seed-everything": "node supabase/seed-everything.js",
+    "perf-test": "node supabase/performance-test.js"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.75.0",
+    "dotenv": "^17.2.3",
+    "next": "15.5.4",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
