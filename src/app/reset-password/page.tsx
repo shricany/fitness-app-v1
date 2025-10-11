@@ -14,10 +14,13 @@ export default function ResetPasswordPage() {
 
   useEffect(() => {
     // Check if user came from reset email link
-    const { data: { session } } = supabase.auth.getSession()
-    if (!session) {
-      setMessage('❌ Invalid or expired reset link')
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) {
+        setMessage('❌ Invalid or expired reset link')
+      }
     }
+    checkSession()
   }, [])
 
   const resetPassword = async (e: React.FormEvent) => {
