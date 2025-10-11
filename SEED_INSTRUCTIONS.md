@@ -1,8 +1,8 @@
 # Complete Data Seeding Instructions
 
-## Step 1: Temporarily Disable RLS
+## Step 1: Temporarily      Disable RLS
 
-Run this SQL in    Supabase console:
+Run this SQL in     Supabase console:
 
 ```sql
 -- Disable RLS for seeding
