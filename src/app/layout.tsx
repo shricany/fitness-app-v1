@@ -33,18 +33,24 @@ export default function RootLayout({
                 <span className="bg-white text-blue-600 px-3 py-1 rounded-full text-lg">💪</span>
                 <span>FitnessZone</span>
               </Link>
-              <div className="hidden md:flex space-x-8">
+              <div className="hidden md:flex space-x-6">
+                <Link href="/dashboard" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
+                  <span>📊</span><span>Dashboard</span>
+                </Link>
                 <Link href="/modules" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
-                  <span>🏋️</span><span>Modules</span>
+                  <span>📚</span><span>Programs</span>
+                </Link>
+                <Link href="/exercises" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
+                  <span>🏋️</span><span>Exercises</span>
+                </Link>
+                <Link href="/challenges" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
+                  <span>🏆</span><span>Challenges</span>
+                </Link>
+                <Link href="/leaderboard" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
+                  <span>👑</span><span>Leaderboard</span>
                 </Link>
                 <Link href="/groups" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
                   <span>👥</span><span>Groups</span>
-                </Link>
-                <Link href="/wall" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
-                  <span>🏆</span><span>Wall of Fame</span>
-                </Link>
-                <Link href="/dashboard" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
-                  <span>📊</span><span>Dashboard</span>
                 </Link>
               </div>
             </div>
