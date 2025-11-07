@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fitness App",
-  description: "Your personal fitness tracker",
+  title: "FitnessPro - Professional Fitness Tracking",
+  description: "Professional fitness tracking and analytics platform",
 };
 
 export default function RootLayout({
@@ -25,32 +25,34 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}>
-        <nav className="bg-gradient-to-r from-blue-600 to-purple-700 text-white shadow-lg">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white`}>
+        <nav className="bg-white border-b border-gray-200 shadow-sm">
           <div className="container mx-auto px-6 py-4">
             <div className="flex justify-between items-center">
-              <Link href="/" className="text-2xl font-bold flex items-center space-x-2">
-                <span className="bg-white text-blue-600 px-3 py-1 rounded-full text-lg">💪</span>
-                <span>FitnessZone</span>
+              <Link href="/" className="text-xl font-bold flex items-center space-x-3 text-gray-900">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white text-sm font-bold">F</span>
+                </div>
+                <span>FitnessPro</span>
               </Link>
-              <div className="hidden md:flex space-x-6">
-                <Link href="/dashboard" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
-                  <span>📊</span><span>Dashboard</span>
+              <div className="hidden md:flex space-x-8">
+                <Link href="/dashboard" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                  Dashboard
                 </Link>
-                <Link href="/modules" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
-                  <span>📚</span><span>Programs</span>
+                <Link href="/modules" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                  Programs
                 </Link>
-                <Link href="/exercises" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
-                  <span>🏋️</span><span>Exercises</span>
+                <Link href="/exercises" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                  Exercises
                 </Link>
-                <Link href="/challenges" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
-                  <span>🏆</span><span>Challenges</span>
+                <Link href="/challenges" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                  Challenges
                 </Link>
-                <Link href="/leaderboard" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
-                  <span>👑</span><span>Leaderboard</span>
+                <Link href="/leaderboard" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                  Leaderboard
                 </Link>
-                <Link href="/groups" className="hover:text-blue-200 transition-colors duration-200 flex items-center space-x-1">
-                  <span>👥</span><span>Groups</span>
+                <Link href="/groups" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                  Groups
                 </Link>
               </div>
             </div>

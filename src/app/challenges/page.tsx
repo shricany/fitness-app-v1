@@ -176,23 +176,26 @@ export default function ChallengesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-800 mb-2">Fitness Challenges 🏆</h1>
-          <p className="text-slate-600 text-lg">Join challenges, compete with others, and earn rewards</p>
+    <div className="min-h-screen bg-gray-50">
+      <div className="bg-white border-b border-gray-200 px-8 py-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Fitness Challenges</h1>
+            <p className="text-sm text-gray-600 mt-1">Join challenges, compete with others, and earn rewards</p>
+          </div>
         </div>
+      </div>
+      <div className="p-8">
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
           <Card className="bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0">
             <CardContent className="p-6 text-center">
               <Trophy className="h-8 w-8 mx-auto mb-2" />
@@ -227,7 +230,7 @@ export default function ChallengesPage() {
         </div>
 
         {/* Tabs */}
-        <div className="flex space-x-1 bg-white rounded-lg p-1 mb-8 w-fit">
+        <div className="flex space-x-1 bg-white rounded-lg p-1 mb-6 w-fit shadow-sm">
           {[
             { key: 'all', label: 'All Challenges' },
             { key: 'joined', label: 'My Challenges' },
@@ -250,7 +253,7 @@ export default function ChallengesPage() {
         {/* Challenges Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredChallenges.map((challenge) => (
-            <Card key={challenge.id} className="hover:shadow-lg transition-all duration-200">
+            <Card key={challenge.id} className="border-0 shadow-sm hover:shadow-md transition-all duration-200">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2">
@@ -326,9 +329,9 @@ export default function ChallengesPage() {
 
         {filteredChallenges.length === 0 && (
           <div className="text-center py-12">
-            <Trophy className="h-16 w-16 text-slate-300 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-slate-600 mb-2">No challenges found</h3>
-            <p className="text-slate-500">
+            <Trophy className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-600 mb-2">No challenges found</h3>
+            <p className="text-gray-500">
               {activeTab === 'joined' 
                 ? "You haven't joined any challenges yet. Start by joining one above!"
                 : activeTab === 'completed'

@@ -223,23 +223,26 @@ export default function ExercisesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-800 mb-2">Exercise Library 💪</h1>
-          <p className="text-slate-600 text-lg">Discover and master individual exercises for your fitness journey</p>
+    <div className="min-h-screen bg-gray-50">
+      <div className="bg-white border-b border-gray-200 px-8 py-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Exercise Library</h1>
+            <p className="text-sm text-gray-600 mt-1">Discover and master individual exercises for your fitness journey</p>
+          </div>
         </div>
+      </div>
+      <div className="p-8">
 
         {/* Search and Filters */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
@@ -283,7 +286,7 @@ export default function ExercisesPage() {
 
         {/* Results Count */}
         <div className="mb-6">
-          <p className="text-slate-600">
+          <p className="text-gray-600">
             Showing {filteredExercises.length} of {exercises.length} exercises
           </p>
         </div>
@@ -291,7 +294,7 @@ export default function ExercisesPage() {
         {/* Exercises Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredExercises.map((exercise) => (
-            <Card key={exercise.id} className="hover:shadow-lg transition-all duration-200 group">
+            <Card key={exercise.id} className="border-0 shadow-sm hover:shadow-md transition-all duration-200 group">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-2">
@@ -346,7 +349,7 @@ export default function ExercisesPage() {
 
                 {/* Action Button */}
                 <Button 
-                  className="w-full bg-blue-600 hover:bg-blue-700 group-hover:shadow-md transition-all"
+                  className="w-full bg-blue-600 hover:bg-blue-700"
                   onClick={() => handleStartExercise(exercise.id)}
                 >
                   <Play className="h-4 w-4 mr-2" />
@@ -359,9 +362,9 @@ export default function ExercisesPage() {
 
         {filteredExercises.length === 0 && (
           <div className="text-center py-12">
-            <Target className="h-16 w-16 text-slate-300 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-slate-600 mb-2">No exercises found</h3>
-            <p className="text-slate-500">Try adjusting your filters or search terms</p>
+            <Target className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-600 mb-2">No exercises found</h3>
+            <p className="text-gray-500">Try adjusting your filters or search terms</p>
           </div>
         )}
       </div>

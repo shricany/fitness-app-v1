@@ -184,20 +184,23 @@ export default function LeaderboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-800 mb-2">Leaderboard 🏆</h1>
-          <p className="text-slate-600 text-lg">See how you rank against other fitness enthusiasts</p>
+    <div className="min-h-screen bg-gray-50">
+      <div className="bg-white border-b border-gray-200 px-8 py-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Leaderboard</h1>
+            <p className="text-sm text-gray-600 mt-1">See how you rank against other fitness enthusiasts</p>
+          </div>
         </div>
+      </div>
+      <div className="p-8">
 
         {/* User's Current Position */}
         {userRank && (
@@ -255,37 +258,37 @@ export default function LeaderboardPage() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <Card className="border-0 shadow-sm">
             <CardContent className="p-6 text-center">
               <Users className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-slate-800">
+              <div className="text-2xl font-bold text-gray-900">
                 {selectedChallenge === 'global' ? '1,234' : activeChallenges.find(c => c.id === selectedChallenge)?.participants || 0}
               </div>
-              <div className="text-sm text-slate-600">Total Participants</div>
+              <div className="text-sm text-gray-600">Total Participants</div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-0 shadow-sm">
             <CardContent className="p-6 text-center">
               <Flame className="h-8 w-8 text-orange-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-slate-800">
+              <div className="text-2xl font-bold text-gray-900">
                 {currentLeaderboard[0]?.streak || 0}
               </div>
-              <div className="text-sm text-slate-600">Top Streak (Days)</div>
+              <div className="text-sm text-gray-600">Top Streak (Days)</div>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-0 shadow-sm">
             <CardContent className="p-6 text-center">
               <Calendar className="h-8 w-8 text-green-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-slate-800">
+              <div className="text-2xl font-bold text-gray-900">
                 {selectedChallenge !== 'global' 
                   ? new Date(activeChallenges.find(c => c.id === selectedChallenge)?.endDate || '').toLocaleDateString()
                   : 'Ongoing'
                 }
               </div>
-              <div className="text-sm text-slate-600">
+              <div className="text-sm text-gray-600">
                 {selectedChallenge !== 'global' ? 'Challenge Ends' : 'Competition'}
               </div>
             </CardContent>
@@ -293,7 +296,7 @@ export default function LeaderboardPage() {
         </div>
 
         {/* Leaderboard */}
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Trophy className="h-5 w-5 text-yellow-600" />

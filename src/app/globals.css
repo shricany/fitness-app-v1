@@ -1,65 +1,49 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-background: oklch(100% 0 0);
+  --color-foreground: oklch(22.86% 0.028 255.21);
+  --color-card: oklch(100% 0 0);
+  --color-card-foreground: oklch(22.86% 0.028 255.21);
+  --color-popover: oklch(100% 0 0);
+  --color-popover-foreground: oklch(22.86% 0.028 255.21);
+  --color-primary: oklch(45.1% 0.15 255.21);
+  --color-primary-foreground: oklch(98.11% 0.011 255.21);
+  --color-secondary: oklch(96.13% 0.011 255.21);
+  --color-secondary-foreground: oklch(45.1% 0.15 255.21);
+  --color-muted: oklch(96.13% 0.011 255.21);
+  --color-muted-foreground: oklch(65.69% 0.018 255.21);
+  --color-accent: oklch(96.13% 0.011 255.21);
+  --color-accent-foreground: oklch(45.1% 0.15 255.21);
+  --color-destructive: oklch(69.29% 0.222 19.83);
+  --color-destructive-foreground: oklch(98.11% 0.011 255.21);
+  --color-border: oklch(92.17% 0.022 255.21);
+  --color-input: oklch(92.17% 0.022 255.21);
+  --color-ring: oklch(22.86% 0.028 255.21);
+  --radius: 0.5rem;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --dark-color-background: oklch(22.86% 0.028 255.21);
+  --dark-color-foreground: oklch(98.11% 0.011 255.21);
+  --dark-color-card: oklch(22.86% 0.028 255.21);
+  --dark-color-card-foreground: oklch(98.11% 0.011 255.21);
+  --dark-color-popover: oklch(22.86% 0.028 255.21);
+  --dark-color-popover-foreground: oklch(98.11% 0.011 255.21);
+  --dark-color-primary: oklch(98.11% 0.011 255.21);
+  --dark-color-primary-foreground: oklch(45.1% 0.15 255.21);
+  --dark-color-secondary: oklch(34.51% 0.033 255.21);
+  --dark-color-secondary-foreground: oklch(98.11% 0.011 255.21);
+  --dark-color-muted: oklch(34.51% 0.033 255.21);
+  --dark-color-muted-foreground: oklch(77.14% 0.021 255.21);
+  --dark-color-accent: oklch(34.51% 0.033 255.21);
+  --dark-color-accent-foreground: oklch(98.11% 0.011 255.21);
+  --dark-color-destructive: oklch(56.97% 0.221 19.83);
+  --dark-color-destructive-foreground: oklch(98.11% 0.011 255.21);
+  --dark-color-border: oklch(34.51% 0.033 255.21);
+  --dark-color-input: oklch(34.51% 0.033 255.21);
+  --dark-color-ring: oklch(77.14% 0.021 255.21);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-}
-
-/* Custom utility classes */
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.btn-primary {
-  @apply bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1;
-}
-
-.card {
-  @apply bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300;
-}
-
-.gradient-bg {
-  @apply bg-gradient-to-br from-blue-50 to-purple-50;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Loading animations */
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
