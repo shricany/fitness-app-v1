@@ -39,6 +39,26 @@ npm run test:e2e
 Notes on CI and installing Cypress
 ---------------------------------
 - In some restricted environments, the Cypress binary download can fail (I observed this when attempting to install here). If that happens in CI, either allow network access for the binary download, use a pre-built Cypress cache in your CI, or use the Cypress Docker image for CI.
+
+API/backend test harness
+------------------------
+This repo already includes a small Node script that tests core Supabase APIs: `supabase/test-apis.js` and an npm script `test-apis`:
+
+```bash
+# run the quick API connectivity checks (requires .env.local with NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY)
+npm run test-apis
+```
+
+What it checks:
+- Database connectivity (modules table)
+- Modules and Exercises table reads
+- Optional Groups table read
+- Auth session call
+
+CI recommendation
+-----------------
+- Add a CI job that sets `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` as secrets and runs `npm run test-apis` as a smoke test to validate the backend before deployments.
+
 Notes
 -----
 - Using `legacy-peer-deps` is safe as a short-term workaround, but may hide real compatibility issues. Test the UI and runtime behavior thoroughly, especially animation-related parts that use `framer-motion`.

@@ -11,9 +11,7 @@ export default async function ModulesPage() {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (!session) {
-    redirect('/login');
-  }
+  const isAuthenticated = !!session;
 
   const { data: modules } = await supabase.from('modules').select('*');
   const { data: exercises } = await supabase.from('exercises').select('module_id');
