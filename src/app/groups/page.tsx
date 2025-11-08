@@ -48,7 +48,12 @@ export default async function GroupsPage() {
 
   return (
     <div className="container mx-auto px-4">
-      <h1 className="text-4xl font-bold my-8">Workout Groups</h1>
+      <div className="flex items-center justify-between my-8">
+        <h1 className="text-4xl font-bold">Workout Groups</h1>
+        <Link href="/create-session" className="ml-4 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors">
+          Create Session
+        </Link>
+      </div>
       <div className="mb-8">
         <form action={handleCreateGroup} className="p-4 border rounded shadow-sm">
           <h2 className="text-2xl font-bold mb-4">Create a New Group</h2>

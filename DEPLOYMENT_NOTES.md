@@ -28,3 +28,28 @@ Notes
 -----
 - Using `legacy-peer-deps` is safe as a short-term workaround, but may hide real compatibility issues. Test the UI and runtime behavior thoroughly, especially animation-related parts that use `framer-motion`.
 - If you choose to downgrade React to 18.x, also update `@types/react` and any other libs that list react 19 as a peer.
+Additional changes made
+----------------------
+- Added a visible "Create Session" CTA in the main navigation (desktop + mobile) to make the session creation page discoverable.
+- Added contextual "Create Session" CTAs on the Dashboard and Groups pages.
+- Added a Cypress E2E test scaffold (`cypress/e2e/create_session.cy.ts`) and npm scripts (`cy:open`, `cy:run`, `test:e2e`) to help validate the create-session flow in CI or locally.
+
+Notes about the E2E test
+------------------------
+- The Cypress test is a lightweight smoke test that asserts the create-session page renders and the basic form fields exist. To run it locally:
+
+```bash
+# start the dev server in one terminal
+npm run dev
+
+# in another terminal, open Cypress
+npm run cy:open
+```
+
+Or run headless:
+
+```bash
+npm run test:e2e
+```
+
+You will need to `npm install` devDependencies (Cypress) before running tests.

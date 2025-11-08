@@ -61,6 +61,14 @@ export default function RootLayout({
                   Create Session
                 </Link>
               </div>
+              <div className="md:hidden flex items-center">
+                <Link
+                  href="/create-session"
+                  className="inline-flex items-center px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  Create
+                </Link>
+              </div>
             </div>
           </div>
         </nav>

@@ -6,6 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:e2e": "cypress run",
     "setup": "node supabase/setup.js",
     "create-tables": "node supabase/create-tables.js",
     "seed": "node supabase/seed.js",
@@ -42,6 +45,7 @@
     "tailwind-merge": "^2.1.0"
   },
   "devDependencies": {
+    "cypress": "^12.17.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
