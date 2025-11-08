@@ -23,8 +23,8 @@ type Upvote = {
   exercise_id: string;
 };
 
-export default async function ModulePage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export default function ModulePage({ params }: any) {
+  const { id } = params;
   const [module, setModule] = useState<Module | null>(null);
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [upvotes, setUpvotes] = useState<string[]>([]);
