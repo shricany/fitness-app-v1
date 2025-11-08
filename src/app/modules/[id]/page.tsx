@@ -131,82 +131,77 @@ export default function ModulePage({ params }: any) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 py-4">
         {/* Header */}
-        <div className="mb-8">
-          <Link href="/modules" className="text-blue-600 hover:text-blue-800 mb-4 inline-flex items-center">
+        <div className="mb-4">
+          <Link href="/modules" className="text-blue-600 hover:text-blue-800 mb-2 inline-flex items-center text-sm">
             ← Back to Modules
           </Link>
-          <div className="bg-white rounded-2xl shadow-lg p-8">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">{module.title}</h1>
-            <p className="text-xl text-gray-600 mb-6">{module.description}</p>
-            
-            {/* Progress Bar */}
-            <div className="mb-6">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-sm font-medium text-gray-700">Progress</span>
-                <span className="text-sm font-medium text-gray-700">{Math.round(progress)}%</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-3">
-                <div 
-                  className="bg-gradient-to-r from-green-400 to-blue-500 h-3 rounded-full transition-all duration-500"
-                  style={{ width: `${progress}%` }}
-                ></div>
+          <div className="bg-white rounded-lg shadow p-4">
+            <div className="flex items-center justify-between mb-2">
+              <h1 className="text-2xl font-bold text-gray-800">{module.title}</h1>
+              <div className="flex items-center gap-3 text-xs text-gray-600">
+                <span>🎯 {exercises.length}</span>
+                <span>✓ {completedExercises.length}</span>
+                <span>👍 {upvotes.length}</span>
               </div>
             </div>
-
-            <div className="flex items-center space-x-4 text-sm text-gray-600">
-              <span>🎯 {exercises.length} exercises</span>
-              <span>✓ {completedExercises.length} completed</span>
-              <span>👍 {upvotes.length} upvoted</span>
+            <p className="text-sm text-gray-600 mb-3">{module.description}</p>
+            
+            {/* Progress Bar */}
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-green-400 to-blue-500 transition-all duration-500"
+                style={{ width: `${progress}%` }}
+              />
             </div>
           </div>
         </div>
 
         {/* Exercises */}
-        <div className="space-y-6">
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {exercises.map((exercise, index) => {
             const isCompleted = completedExercises.includes(exercise.id);
             const isUpvoted = upvotes.includes(exercise.id);
             
             return (
-              <div key={exercise.id} className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="flex items-center space-x-3">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold ${
+              <div key={exercise.id} className="bg-white rounded-lg shadow overflow-hidden">
+                <div className="p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-sm font-bold ${
                         isCompleted ? 'bg-green-500' : 'bg-gray-400'
                       }`}>
                         {isCompleted ? '✓' : index + 1}
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-800">{exercise.title}</h2>
+                      <h2 className="font-bold text-gray-800 truncate">{exercise.title}</h2>
                     </div>
                     
-                    <div className="flex space-x-2">
+                    <div className="flex gap-1">
                       <button
                         onClick={() => handleUpvote(exercise.id)}
-                        className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${
+                        className={`px-2 py-1 rounded-full text-sm transition-all duration-200 ${
                           isUpvoted 
-                            ? 'bg-blue-500 text-white shadow-lg' 
+                            ? 'bg-blue-500 text-white' 
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         }`}
                       >
-                        {isUpvoted ? '👍 Upvoted' : '👍 Upvote'}
+                        {isUpvoted ? '👍' : '👍'}
                       </button>
                       
                       {!isCompleted && (
                         <button
                           onClick={() => handleComplete(exercise.id)}
-                          className="px-4 py-2 bg-green-500 text-white rounded-full font-medium hover:bg-green-600 transition-colors duration-200"
+                          className="px-2 py-1 bg-green-500 text-white rounded-full text-sm hover:bg-green-600 transition-colors duration-200"
                         >
-                          ✓ Complete
+                          ✓
                         </button>
                       )}
                     </div>
                   </div>
 
                   {exercise.video_url && (
-                    <div className="aspect-video rounded-xl overflow-hidden bg-gray-100">
+                    <div className="aspect-video rounded-md overflow-hidden bg-gray-100">
                       <iframe
                         src={getYouTubeEmbedUrl(exercise.video_url)}
                         className="w-full h-full"
@@ -223,13 +218,13 @@ export default function ModulePage({ params }: any) {
 
         {/* Completion Actions */}
         {progress === 100 && (
-          <div className="mt-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-2xl shadow-lg p-8 text-center text-white">
-            <div className="text-6xl mb-4">🎉</div>
-            <h2 className="text-3xl font-bold mb-4">Congratulations!</h2>
-            <p className="text-xl mb-6">You've completed the {module.title} module!</p>
+          <div className="mt-4 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg shadow p-4 text-center text-white">
+            <div className="text-3xl mb-2">🎉</div>
+            <h2 className="text-xl font-bold mb-2">Congratulations!</h2>
+            <p className="text-sm mb-3">You've completed the {module.title} module!</p>
             <button
               onClick={handleShare}
-              className="bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1"
+              className="bg-white text-blue-600 px-4 py-2 rounded-full text-sm font-bold hover:shadow-lg transition-all duration-200"
             >
               🏆 Share Achievement
             </button>
