@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from 'next/link';
+import CreateSessionQuick from '@/components/CreateSessionQuick';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -62,12 +63,7 @@ export default function RootLayout({
                 </Link>
               </div>
               <div className="md:hidden flex items-center">
-                <Link
-                  href="/create-session"
-                  className="inline-flex items-center px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors"
-                >
-                  Create
-                </Link>
+                <CreateSessionQuick />
               </div>
             </div>
           </div>
