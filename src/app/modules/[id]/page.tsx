@@ -93,14 +93,14 @@ export default function ModulePage({ params }: any) {
   };
 
   const handleShare = async () => {
-    if (user && module) {
-      await supabase.from('walls').insert({
-        user_id: user.id,
-        module_id: module.id,
-        content: `Just crushed the ${module.title} module! 💪 Feeling stronger every day! #FitnessZone`,
-      });
-      router.push('/wall');
-    }
+    if (!user || !module) return;
+
+    await supabase.from('walls').insert({
+      user_id: user.id,
+      module_id: module.id,
+      content: `Just crushed the ${module.title} module! 💪 Feeling stronger every day! #FitnessZone`,
+    });
+    router.push('/wall');
   };
 
   const getYouTubeEmbedUrl = (url: string) => {
@@ -174,106 +174,116 @@ export default function ModulePage({ params }: any) {
           </div>
         </div>
 
-        {/* Exercise Navigation */}
-        <div className="flex justify-between items-center mb-4">
-          <button 
-            onClick={handlePrev}
-            disabled={currentExercise === 0}
-            className="p-2 rounded-full bg-white shadow-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-          >
-            ←
-          </button>
-          <span className="text-sm font-medium">
-            Exercise {currentExercise + 1} of {exercises.length}
-          </span>
-          <button 
-            onClick={handleNext}
-            disabled={currentExercise === exercises.length - 1}
-            className="p-2 rounded-full bg-white shadow-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-          >
-            →
-          </button>
-        </div>
-
-        {/* Exercise Carousel */}
-        <div className="relative h-[calc(100vh-16rem)] flex items-center justify-center overflow-hidden">
+        {/* Exercise Book Layout */}
+        <div className="relative h-[calc(100vh-16rem)] flex items-center justify-center">
           <div className="absolute inset-0 flex items-center justify-center">
-            {exercises.map((exercise, index) => {
-              const isCompleted = completedExercises.includes(exercise.id);
-              const isUpvoted = upvotes.includes(exercise.id);
-              const isCurrent = index === currentExercise;
-              const isPrev = index === currentExercise - 1;
-              const isNext = index === currentExercise + 1;
-              
-              if (!isCurrent && !isPrev && !isNext) return null;
-
-              return (
-                <div 
-                  key={exercise.id} 
-                  className={`
-                    absolute bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300
-                    ${isCurrent ? 'w-full max-w-3xl opacity-100 z-20 scale-100' : 'w-32 opacity-40 scale-95'}
-                    ${isPrev ? '-translate-x-full z-10' : ''}
-                    ${isNext ? 'translate-x-full z-10' : ''}
-                  `}
-                  style={{
-                    transform: isCurrent 
-                      ? 'translateX(0) scale(1)' 
-                      : isPrev 
-                        ? 'translateX(-100%) scale(0.9)' 
-                        : 'translateX(100%) scale(0.9)'
-                  }}
-                >
-                  <div className="p-4">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-2">
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold ${
-                          isCompleted ? 'bg-green-500' : 'bg-gray-400'
-                        }`}>
-                          {isCompleted ? '✓' : index + 1}
+            <div className="relative w-full max-w-6xl mx-auto flex items-stretch">
+              {/* Navigation + Exercise Container */}
+              <div className="flex-1 flex">
+                {/* Previous Exercise Preview */}
+                {currentExercise > 0 && (
+                  <div className="w-24 flex items-center">
+                    <button 
+                      onClick={handlePrev}
+                      className="group relative h-full flex items-center justify-center"
+                    >
+                      <div className="absolute right-0 w-20 h-[80%] bg-white/90 shadow-lg rounded-l-lg transform rotate-6 origin-right transition-all group-hover:scale-105">
+                        <div className="p-2 text-xs text-gray-600 truncate rotate-[-6deg] origin-right">
+                          {exercises[currentExercise - 1].title}
                         </div>
-                        <h2 className="text-xl font-bold text-gray-800">{exercise.title}</h2>
                       </div>
-                      
-                      {isCurrent && (
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => handleUpvote(exercise.id)}
-                            className={`px-4 py-2 rounded-full text-sm transition-all duration-200 ${
-                              isUpvoted 
-                                ? 'bg-blue-500 text-white shadow-md' 
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }`}
-                          >
-                            {isUpvoted ? '👍 Upvoted' : '👍 Upvote'}
-                          </button>
-                          
-                          {!isCompleted && (
-                            <button
-                              onClick={() => handleComplete(exercise.id)}
-                              className="px-4 py-2 bg-green-500 text-white rounded-full text-sm hover:bg-green-600 transition-colors duration-200 shadow-md"
-                            >
-                              Complete & Next
-                            </button>
-                          )}
-                        </div>
-                      )}
-                    </div>
-
-                    {exercise.video_url && isCurrent && (
-                      <div className="aspect-video rounded-lg overflow-hidden bg-gray-100">
-                        <iframe
-                          src={getYouTubeEmbedUrl(exercise.video_url)}
-                          className="w-full h-full"
-                          allowFullScreen
-                          title={exercise.title}
-                        />
+                      <div className="absolute z-10 left-0 w-8 h-8 bg-white shadow-md rounded-full flex items-center justify-center">
+                        ←
                       </div>
-                    )}
+                    </button>
                   </div>
-                </div>
-              );
-            })}
+                )}
+
+                {/* Current Exercise */}
+                {exercises.map((exercise, index) => {
+                  const isCompleted = completedExercises.includes(exercise.id);
+                  const isUpvoted = upvotes.includes(exercise.id);
+                  const isCurrent = index === currentExercise;
+                  
+                  if (!isCurrent) return null;
+
+                  return (
+                    <div 
+                      key={exercise.id} 
+                      className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 mx-4"
+                    >
+                      <div className="p-6">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold ${
+                              isCompleted ? 'bg-green-500' : 'bg-gray-400'
+                            }`}>
+                              {isCompleted ? '✓' : index + 1}
+                            </div>
+                            <div>
+                              <h2 className="text-xl font-bold text-gray-800">{exercise.title}</h2>
+                              <span className="text-sm text-gray-500">Exercise {currentExercise + 1} of {exercises.length}</span>
+                            </div>
+                          </div>
+                          
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => handleUpvote(exercise.id)}
+                              className={`px-4 py-2 rounded-full text-sm transition-all duration-200 ${
+                                isUpvoted 
+                                  ? 'bg-blue-500 text-white shadow-md' 
+                                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                              }`}
+                            >
+                              {isUpvoted ? '👍 Upvoted' : '👍 Upvote'}
+                            </button>
+                            
+                            {!isCompleted && (
+                              <button
+                                onClick={() => handleComplete(exercise.id)}
+                                className="px-4 py-2 bg-green-500 text-white rounded-full text-sm hover:bg-green-600 transition-colors duration-200 shadow-md"
+                              >
+                                Complete & Next
+                              </button>
+                            )}
+                          </div>
+                        </div>
+
+                        {exercise.video_url && (
+                          <div className="aspect-video rounded-lg overflow-hidden bg-gray-100">
+                            <iframe
+                              src={getYouTubeEmbedUrl(exercise.video_url)}
+                              className="w-full h-full"
+                              allowFullScreen
+                              title={exercise.title}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* Next Exercise Preview */}
+                {currentExercise < exercises.length - 1 && (
+                  <div className="w-24 flex items-center">
+                    <button 
+                      onClick={handleNext}
+                      className="group relative h-full flex items-center justify-center"
+                    >
+                      <div className="absolute left-0 w-20 h-[80%] bg-white/90 shadow-lg rounded-r-lg transform -rotate-6 origin-left transition-all group-hover:scale-105">
+                        <div className="p-2 text-xs text-gray-600 truncate rotate-6 origin-left">
+                          {exercises[currentExercise + 1].title}
+                        </div>
+                      </div>
+                      <div className="absolute z-10 right-0 w-8 h-8 bg-white shadow-md rounded-full flex items-center justify-center">
+                        →
+                      </div>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
