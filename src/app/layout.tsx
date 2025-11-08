@@ -35,7 +35,7 @@ export default function RootLayout({
                 </div>
                 <span>FitnessPro</span>
               </Link>
-              <div className="hidden md:flex space-x-8">
+              <div className="hidden md:flex items-center space-x-8">
                 <Link href="/dashboard" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
                   Dashboard
                 </Link>
@@ -53,6 +53,12 @@ export default function RootLayout({
                 </Link>
                 <Link href="/groups" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
                   Groups
+                </Link>
+                <Link
+                  href="/create-session"
+                  className="ml-4 inline-flex items-center px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  Create Session
                 </Link>
               </div>
             </div>
