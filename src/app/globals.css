@@ -47,3 +47,29 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
 }
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.rotate-y-\[-15deg\] {
+  transform: rotateY(-15deg);
+}
+
+.rotate-y-\[-30deg\] {
+  transform: rotateY(-30deg);
+}
+
+.rotate-y-\[15deg\] {
+  transform: rotateY(15deg);
+}
+
+.rotate-y-\[30deg\] {
+  transform: rotateY(30deg);
+}
+
+.transform-gpu {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}

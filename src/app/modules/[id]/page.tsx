@@ -182,17 +182,37 @@ export default function ModulePage({ params }: any) {
               <div className="flex-1 flex">
                 {/* Previous Exercise Preview */}
                 {currentExercise > 0 && (
-                  <div className="w-24 flex items-center">
+                  <div className="w-48 flex items-center">
                     <button 
                       onClick={handlePrev}
-                      className="group relative h-full flex items-center justify-center"
+                      className="group relative h-full w-full flex items-center justify-center perspective-1000"
                     >
-                      <div className="absolute right-0 w-20 h-[80%] bg-white/90 shadow-lg rounded-l-lg transform rotate-6 origin-right transition-all group-hover:scale-105">
-                        <div className="p-2 text-xs text-gray-600 truncate rotate-[-6deg] origin-right">
-                          {exercises[currentExercise - 1].title}
+                      <div className="absolute right-0 w-40 h-[90%] bg-white shadow-lg rounded-l-lg origin-right 
+                        transition-all duration-500 ease-in-out transform-gpu
+                        group-hover:rotate-y-[-15deg] group-active:rotate-y-[-30deg] group-active:translate-x-8
+                        border-r border-gray-100"
+                      >
+                        <div className="h-full p-3 flex flex-col justify-between transform-gpu rotate-y-[15deg] group-hover:rotate-y-0">
+                          <div>
+                            <div className="text-xs font-medium text-gray-400 mb-1">Previous</div>
+                            <div className="text-sm font-bold text-gray-700 line-clamp-2">
+                              {exercises[currentExercise - 1].title}
+                            </div>
+                          </div>
+                          <div className={`text-xs px-2 py-1 rounded-full w-fit
+                            ${completedExercises.includes(exercises[currentExercise - 1].id) 
+                              ? 'bg-green-100 text-green-700' 
+                              : 'bg-gray-100 text-gray-600'
+                            }`}
+                          >
+                            Exercise {currentExercise}
+                          </div>
                         </div>
+                        <div className="absolute inset-0 bg-gradient-to-l from-white/50 to-transparent pointer-events-none" />
                       </div>
-                      <div className="absolute z-10 left-0 w-8 h-8 bg-white shadow-md rounded-full flex items-center justify-center">
+                      <div className="absolute z-10 -right-4 w-8 h-8 bg-white shadow-md rounded-full flex items-center justify-center
+                        transition-transform group-hover:-translate-x-1 group-active:-translate-x-2"
+                      >
                         ←
                       </div>
                     </button>
@@ -210,14 +230,15 @@ export default function ModulePage({ params }: any) {
                   return (
                     <div 
                       key={exercise.id} 
-                      className="flex-1 bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 mx-4"
+                      className="flex-1 bg-white rounded-lg shadow-xl overflow-hidden transition-all duration-300 mx-4 relative"
                     >
-                      <div className="p-6">
+                      <div className="absolute inset-0 bg-gradient-to-r from-black/[0.02] via-transparent to-black/[0.02]" />
+                      <div className="relative p-6">
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center gap-3">
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold ${
+                            <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${
                               isCompleted ? 'bg-green-500' : 'bg-gray-400'
-                            }`}>
+                            } shadow-md`}>
                               {isCompleted ? '✓' : index + 1}
                             </div>
                             <div>
@@ -241,7 +262,8 @@ export default function ModulePage({ params }: any) {
                             {!isCompleted && (
                               <button
                                 onClick={() => handleComplete(exercise.id)}
-                                className="px-4 py-2 bg-green-500 text-white rounded-full text-sm hover:bg-green-600 transition-colors duration-200 shadow-md"
+                                className="px-4 py-2 bg-green-500 text-white rounded-full text-sm hover:bg-green-600 
+                                  transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
                               >
                                 Complete & Next
                               </button>
@@ -250,7 +272,7 @@ export default function ModulePage({ params }: any) {
                         </div>
 
                         {exercise.video_url && (
-                          <div className="aspect-video rounded-lg overflow-hidden bg-gray-100">
+                          <div className="aspect-video rounded-lg overflow-hidden bg-gray-100 shadow-inner">
                             <iframe
                               src={getYouTubeEmbedUrl(exercise.video_url)}
                               className="w-full h-full"
@@ -266,17 +288,32 @@ export default function ModulePage({ params }: any) {
 
                 {/* Next Exercise Preview */}
                 {currentExercise < exercises.length - 1 && (
-                  <div className="w-24 flex items-center">
+                  <div className="w-48 flex items-center">
                     <button 
                       onClick={handleNext}
-                      className="group relative h-full flex items-center justify-center"
+                      className="group relative h-full w-full flex items-center justify-center perspective-1000"
                     >
-                      <div className="absolute left-0 w-20 h-[80%] bg-white/90 shadow-lg rounded-r-lg transform -rotate-6 origin-left transition-all group-hover:scale-105">
-                        <div className="p-2 text-xs text-gray-600 truncate rotate-6 origin-left">
-                          {exercises[currentExercise + 1].title}
+                      <div className="absolute left-0 w-40 h-[90%] bg-white shadow-lg rounded-r-lg origin-left 
+                        transition-all duration-500 ease-in-out transform-gpu
+                        group-hover:rotate-y-[15deg] group-active:rotate-y-[30deg] group-active:-translate-x-8
+                        border-l border-gray-100"
+                      >
+                        <div className="h-full p-3 flex flex-col justify-between transform-gpu rotate-y-[-15deg] group-hover:rotate-y-0">
+                          <div>
+                            <div className="text-xs font-medium text-gray-400 mb-1">Next Up</div>
+                            <div className="text-sm font-bold text-gray-700 line-clamp-2">
+                              {exercises[currentExercise + 1].title}
+                            </div>
+                          </div>
+                          <div className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full w-fit">
+                            Exercise {currentExercise + 2}
+                          </div>
                         </div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/50 pointer-events-none" />
                       </div>
-                      <div className="absolute z-10 right-0 w-8 h-8 bg-white shadow-md rounded-full flex items-center justify-center">
+                      <div className="absolute z-10 -left-4 w-8 h-8 bg-white shadow-md rounded-full flex items-center justify-center
+                        transition-transform group-hover:translate-x-1 group-active:translate-x-2"
+                      >
                         →
                       </div>
                     </button>
